@@ -1,0 +1,190 @@
+/// <reference path="variables.less" />
+/// <reference path="mixins.less" />
+
+.pagecontent {
+    position: absolute;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    border: solid 1px @border-color;
+    border-radius: 5px;
+    background-color: #fff;
+    z-index: 999;
+}
+
+.pagecontent--below {
+    margin-top: @pagecontent-arrow-size-unit;
+    .arrow-outset-top(@pagecontent-arrow-size);
+}
+
+.pagecontent--above {
+    margin-top: -@pagecontent-arrow-size-unit;
+    .arrow-outset-bottom(@pagecontent-arrow-size);
+}
+
+.pagecontent--before {
+    margin-left: -@pagecontent-arrow-size-unit;
+    .arrow-outset-right(@pagecontent-arrow-size);
+}
+
+.pagecontent--after {
+    margin-left: @pagecontent-arrow-size-unit;
+    .arrow-outset-left(@pagecontent-arrow-size);
+}
+
+.pagecontent--beginning {
+    .pagecontent--below&,
+    .pagecontent--above& {
+        &:before,
+        &:after {
+            left: @pagecontent-arrow-offset-unit;
+        }
+    }
+
+    .pagecontent--before&,
+    .pagecontent--after& {
+        &:before,
+        &:after {
+            top: @pagecontent-arrow-offset-unit;
+        }
+    }
+}
+
+.pagecontent--center {
+
+}
+
+.pagecontent--end {
+    .pagecontent--below&,
+    .pagecontent--above& {
+        &:before,
+        &:after {
+            right: @pagecontent-arrow-offset-unit;
+            left: auto;
+        }
+    }
+
+    .pagecontent--before&,
+    .pagecontent--after& {
+        &:before,
+        &:after {
+            top: auto;
+            bottom: @pagecontent-arrow-offset-unit;
+        }
+    }
+}
+/// <reference path="variables.less" />
+/// <reference path="mixins.less" />
+
+.popover {
+    display: none;
+    padding: 5px;
+    transition: none;
+
+    & [pop-over-toggle] {
+        cursor: pointer;
+    }
+
+    &--fullScreen {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
+        border-radius: 0;
+        padding-top: 30px;
+    }
+
+    &--isVisible {
+        display: block;
+    }
+}
+
+.popover-scrollable {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 400px;
+}
+
+[pop-over] {
+    cursor: pointer;
+}
+
+.popover-select {
+    display: flex;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex-grow: 1;
+    justify-content: space-between;
+    position: relative;
+}
+
+.popover-select-caret {
+    // &:extend(.fa all, .fa-caret-down all);
+    vertical-align: middle;
+    padding: 0 .5em;
+    z-index: 1;
+}
+
+.popover-close {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    .popover--fullScreen > & {
+        display: inline-block;
+    }
+}
+/// <reference path="variables.less" />
+/// <reference path="mixins.less" />
+
+.popoverMenu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li {
+        display: block;
+
+        &:not(.popoverMenu-divider) {
+            margin: 0;
+        }
+
+        &:not(.popoverMenu-title) {
+            padding: 0;
+        }
+    }
+}
+
+.popoverMenu-link {
+    color: @color-gray-darker;
+    display: block;
+    padding: 10px 20px;
+    white-space: nowrap;
+
+    &,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+        text-decoration: none;
+        outline: none;
+    }
+
+    &:hover {
+        background-color: @popover-menu-link-hover;
+    }
+}
+
+.popoverMenu-divider {
+    .divider-light();
+    margin: 10px 0;
+}
+
+.popoverMenu-title {
+    padding: 10px 20px;
+    .font-size(@typescale);
+    font-weight: bold;
+    text-align: left;
+    word-wrap: break-word;
+}

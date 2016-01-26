@@ -75,6 +75,15 @@ function styles() {
         .pipe(autoprefixer())
         .pipe(concat('angular-popover.css'))
         .pipe(gulp.dest(dest));
+        
+    gulp.src([
+            '!src/variables.less',
+            '!src/mixins.less',
+            '!src/assets.less',
+            'src/**/*.less'
+        ])
+        .pipe(concat('angular-popover.less'))
+        .pipe(gulp.dest(dest));
 
     gulp.src(['src/variables.less'])
         .pipe(concat('angular-popover-variables.less'))
