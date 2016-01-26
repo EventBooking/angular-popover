@@ -1,0 +1,73 @@
+/// <reference path="variables.less" />
+/// <reference path="mixins.less" />
+
+.pagecontent {
+    position: absolute;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    border: solid 1px @border-color;
+    border-radius: 5px;
+    background-color: #fff;
+    z-index: 999;
+}
+
+.pagecontent--below {
+    margin-top: @pagecontent-arrow-size-unit;
+    .arrow-outset-top(@pagecontent-arrow-size);
+}
+
+.pagecontent--above {
+    margin-top: -@pagecontent-arrow-size-unit;
+    .arrow-outset-bottom(@pagecontent-arrow-size);
+}
+
+.pagecontent--before {
+    margin-left: -@pagecontent-arrow-size-unit;
+    .arrow-outset-right(@pagecontent-arrow-size);
+}
+
+.pagecontent--after {
+    margin-left: @pagecontent-arrow-size-unit;
+    .arrow-outset-left(@pagecontent-arrow-size);
+}
+
+.pagecontent--beginning {
+    .pagecontent--below&,
+    .pagecontent--above& {
+        &:before,
+        &:after {
+            left: @pagecontent-arrow-offset-unit;
+        }
+    }
+
+    .pagecontent--before&,
+    .pagecontent--after& {
+        &:before,
+        &:after {
+            top: @pagecontent-arrow-offset-unit;
+        }
+    }
+}
+
+.pagecontent--center {
+
+}
+
+.pagecontent--end {
+    .pagecontent--below&,
+    .pagecontent--above& {
+        &:before,
+        &:after {
+            right: @pagecontent-arrow-offset-unit;
+            left: auto;
+        }
+    }
+
+    .pagecontent--before&,
+    .pagecontent--after& {
+        &:before,
+        &:after {
+            top: auto;
+            bottom: @pagecontent-arrow-offset-unit;
+        }
+    }
+}

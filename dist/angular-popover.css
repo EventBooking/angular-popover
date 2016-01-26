@@ -1,0 +1,272 @@
+/* General */
+.divider-dark {
+  overflow: hidden;
+  height: 1px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-image: -webkit-radial-gradient(circle, #626262, #33373b);
+  background-image: radial-gradient(circle, #626262, #33373b);
+}
+.divider-light {
+  overflow: hidden;
+  height: 1px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-image: -webkit-radial-gradient(circle, #e5e5e5, #ffffff);
+  background-image: radial-gradient(circle, #e5e5e5, #ffffff);
+}
+.popover {
+  display: none;
+  padding: 5px;
+  -webkit-transition: none;
+          transition: none;
+}
+.popover [pop-over-toggle] {
+  cursor: pointer;
+}
+.popover--fullScreen {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  border-radius: 0;
+  padding-top: 30px;
+}
+.popover--isVisible {
+  display: block;
+}
+.popover-scrollable {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 400px;
+}
+[pop-over] {
+  cursor: pointer;
+}
+.popover-select {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+}
+.popover-select-caret {
+  vertical-align: middle;
+  padding: 0 .5em;
+  z-index: 1;
+}
+.popover-close {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.popover--fullScreen > .popover-close {
+  display: inline-block;
+}
+.pagecontent {
+  position: absolute;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  border: solid 1px #E5E5E3;
+  border-radius: 5px;
+  background-color: #fff;
+  z-index: 999;
+}
+.pagecontent--below {
+  margin-top: 14px;
+}
+.pagecontent--below:before,
+.pagecontent--below:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: calc(50% - 14px);
+  top: auto;
+  bottom: auto;
+  right: auto;
+}
+.pagecontent--below:before {
+  top: -14px;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid #E5E5E3;
+}
+.pagecontent--below:after {
+  top: -13px;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid #fff;
+}
+.pagecontent--above {
+  margin-top: -14px;
+}
+.pagecontent--above:before,
+.pagecontent--above:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: calc(50% - 14px);
+  top: auto;
+  bottom: auto;
+  right: auto;
+}
+.pagecontent--above:before {
+  bottom: -14px;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 14px solid #E5E5E3;
+}
+.pagecontent--above:after {
+  bottom: -13px;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 14px solid #fff;
+}
+.pagecontent--before {
+  margin-left: -14px;
+}
+.pagecontent--before:before,
+.pagecontent--before:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: calc(50% - 14px);
+  left: auto;
+  right: auto;
+  bottom: auto;
+}
+.pagecontent--before:before {
+  right: -14px;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-left: 14px solid #E5E5E3;
+}
+.pagecontent--before:after {
+  right: -13px;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-left: 14px solid #fff;
+}
+.pagecontent--after {
+  margin-left: 14px;
+}
+.pagecontent--after:before,
+.pagecontent--after:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: calc(50% - 14px);
+  left: auto;
+  right: auto;
+  bottom: auto;
+}
+.pagecontent--after:before {
+  left: -14px;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 14px solid #E5E5E3;
+}
+.pagecontent--after:after {
+  left: -13px;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 14px solid #fff;
+}
+.pagecontent--below.pagecontent--beginning:before,
+.pagecontent--above.pagecontent--beginning:before,
+.pagecontent--below.pagecontent--beginning:after,
+.pagecontent--above.pagecontent--beginning:after {
+  left: 8px;
+}
+.pagecontent--before.pagecontent--beginning:before,
+.pagecontent--after.pagecontent--beginning:before,
+.pagecontent--before.pagecontent--beginning:after,
+.pagecontent--after.pagecontent--beginning:after {
+  top: 8px;
+}
+.pagecontent--below.pagecontent--end:before,
+.pagecontent--above.pagecontent--end:before,
+.pagecontent--below.pagecontent--end:after,
+.pagecontent--above.pagecontent--end:after {
+  right: 8px;
+  left: auto;
+}
+.pagecontent--before.pagecontent--end:before,
+.pagecontent--after.pagecontent--end:before,
+.pagecontent--before.pagecontent--end:after,
+.pagecontent--after.pagecontent--end:after {
+  top: auto;
+  bottom: 8px;
+}
+.popoverMenu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.popoverMenu > li {
+  display: block;
+}
+.popoverMenu > li:not(.popoverMenu-divider) {
+  margin: 0;
+}
+.popoverMenu > li:not(.popoverMenu-title) {
+  padding: 0;
+}
+.popoverMenu-link {
+  color: #4C4C47;
+  display: block;
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+.popoverMenu-link,
+.popoverMenu-link:visited,
+.popoverMenu-link:hover,
+.popoverMenu-link:active,
+.popoverMenu-link:focus {
+  text-decoration: none;
+  outline: none;
+}
+.popoverMenu-link:hover {
+  background-color: #EFEFEE;
+}
+.popoverMenu-divider {
+  overflow: hidden;
+  height: 1px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-image: -webkit-radial-gradient(circle, #e5e5e5, #ffffff);
+  background-image: radial-gradient(circle, #e5e5e5, #ffffff);
+  margin: 10px 0;
+}
+.popoverMenu-title {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: left;
+  word-wrap: break-word;
+}

@@ -1,0 +1,53 @@
+/// <reference path="variables.less" />
+/// <reference path="mixins.less" />
+
+.popoverMenu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li {
+        display: block;
+
+        &:not(.popoverMenu-divider) {
+            margin: 0;
+        }
+
+        &:not(.popoverMenu-title) {
+            padding: 0;
+        }
+    }
+}
+
+.popoverMenu-link {
+    color: @color-gray-darker;
+    display: block;
+    padding: 10px 20px;
+    white-space: nowrap;
+
+    &,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+        text-decoration: none;
+        outline: none;
+    }
+
+    &:hover {
+        background-color: @popover-menu-link-hover;
+    }
+}
+
+.popoverMenu-divider {
+    .divider-light();
+    margin: 10px 0;
+}
+
+.popoverMenu-title {
+    padding: 10px 20px;
+    .font-size(@typescale);
+    font-weight: bold;
+    text-align: left;
+    word-wrap: break-word;
+}

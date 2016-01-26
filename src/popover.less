@@ -1,0 +1,64 @@
+/// <reference path="variables.less" />
+/// <reference path="mixins.less" />
+
+.popover {
+    display: none;
+    padding: 5px;
+    transition: none;
+
+    & [pop-over-toggle] {
+        cursor: pointer;
+    }
+
+    &--fullScreen {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
+        border-radius: 0;
+        padding-top: 30px;
+    }
+
+    &--isVisible {
+        display: block;
+    }
+}
+
+.popover-scrollable {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 400px;
+}
+
+[pop-over] {
+    cursor: pointer;
+}
+
+.popover-select {
+    display: flex;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex-grow: 1;
+    justify-content: space-between;
+    position: relative;
+}
+
+.popover-select-caret {
+    // &:extend(.fa all, .fa-caret-down all);
+    vertical-align: middle;
+    padding: 0 .5em;
+    z-index: 1;
+}
+
+.popover-close {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    .popover--fullScreen > & {
+        display: inline-block;
+    }
+}
