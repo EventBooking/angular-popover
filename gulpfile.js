@@ -77,11 +77,11 @@ function styles() {
         .pipe(gulp.dest(dest));
 
     gulp.src(['src/variables.less'])
-        .pipe(concat('angular-popover-variables.css'))
+        .pipe(concat('angular-popover-variables.less'))
         .pipe(gulp.dest(dest));
 
     gulp.src(['src/mixins.less'])
-        .pipe(concat('angular-popover-mixins.css'))
+        .pipe(concat('angular-popover-mixins.less'))
         .pipe(gulp.dest(dest));
 }
 
