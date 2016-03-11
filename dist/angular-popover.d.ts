@@ -1,4 +1,3 @@
-declare var Tether: any;
 declare module AngularPopoverModule {
 }
 declare module AngularPopoverModule {

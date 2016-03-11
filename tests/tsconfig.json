@@ -1,20 +1,14 @@
 {
     "compilerOptions": {
-        "declaration": true,
         "noImplicitAny": false,
         "noEmitOnError": true,
         "removeComments": false,
         "inlineSourceMap": true,
         "inlineSources": true,
-        "target": "es5",
-        "out": "dist/angular-popover.js"
+        "target": "es5"
     },
     "files": [
-        "../typings/main.d.ts",
-        "app.ts",
-        "mobile.ts",
-        "pageContent.ts",
-        "popover.ts"
+        "../typings/main.d.ts"
     ],
     "ignore": [
         "../typings"
