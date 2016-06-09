@@ -12,8 +12,8 @@ module AngularPopoverModule {
         show: any;
         hide: any;
         initialized: boolean;
-        popOverClick = (): any => {};
-        popOverDisabled = (): any => {};
+        popOverClick = (): any => { };
+        popOverDisabled = (): any => { };
 
         private _isVisible = false;
 
@@ -46,7 +46,7 @@ module AngularPopoverModule {
     class PopOverDirective {
         static $inject = ["$q", "$parse", "$compile", "$window", "$templateCache", "$timeout", "pageContentFactory"];
 
-        constructor(private $q: angular.IQService, private $parse: angular.IParseService, private $compile, private $window, private $templateCache, private $timeout, private pageContentFactory: IPageContentFactory) {}
+        constructor(private $q: angular.IQService, private $parse: angular.IParseService, private $compile, private $window, private $templateCache, private $timeout, private pageContentFactory: IPageContentFactory) { }
 
         restrict = 'A';
         // scope = DO NOT USE A SCOPE ON THIS! 360NOSCOPE
@@ -72,6 +72,7 @@ module AngularPopoverModule {
             var $body = angular.element('body'),
                 $html = angular.element('html'),
                 isVertical = typeof $attrs.popOverHorizontal == 'undefined',
+                positionType = $attrs.positionType || 'mouse',
                 xOffset = isVertical ? 27 : 20,
                 yOffset = isVertical ? 16 : 24,
                 pageContentService: IPageContentService,
@@ -135,7 +136,8 @@ module AngularPopoverModule {
             };
 
             $element.on("click.popOver", e => {
-                position = { x: e.pageX, y: e.pageY };
+                if (positionType == 'mouse')
+                    position = { x: e.pageX, y: e.pageY };
                 ctrl.isVisible = !ctrl.isVisible;
                 $scope.$apply();
             });
@@ -154,17 +156,17 @@ module AngularPopoverModule {
                 $scope.$apply();
             });
 
-//             $html.on(getEvent("DOMMouseScroll", "mousewheel"), (e) => {
-//                 if (!ctrl.isVisible)
-//                     return;
-// 
-//                 if (scrollableContent && scrollableContent.has(e.target).length > 0) {
-//                     return;
-//                 }
-// 
-//                 ctrl.isVisible = false;
-//                 $scope.$apply();
-//             });
+            //             $html.on(getEvent("DOMMouseScroll", "mousewheel"), (e) => {
+            //                 if (!ctrl.isVisible)
+            //                     return;
+            // 
+            //                 if (scrollableContent && scrollableContent.has(e.target).length > 0) {
+            //                     return;
+            //                 }
+            // 
+            //                 ctrl.isVisible = false;
+            //                 $scope.$apply();
+            //             });
 
             $body.on(getEvent("keyup"), e => {
                 if (!ctrl.isVisible)

@@ -44,6 +44,10 @@ module AngularPopoverModule {
             return new Point(this.left, this.bottom);
         }
 
+        public bottomCenter(size: Size): Point {
+            return new Point(this.left + size.width / 2, this.bottom)
+        }
+
         public get bottomRight(): Point {
             return new Point(this.right, this.bottom);
         }
@@ -128,12 +132,13 @@ module AngularPopoverModule {
         positionFromElement(element) {
             this.reset();
 
-            var elementSize = new Size(element.outerWidth(true), element.outerHeight(true));
+            var elementSize = new Size(element.outerWidth(false), element.outerHeight(false));
             var contentSize = new Size(this.content.outerWidth(true), this.content.outerHeight(true));
 
             var pos = element.offset();
             var elementBox = new Boundary(pos.top, pos.left, pos.top + elementSize.height, pos.left + elementSize.width);
 
+            var belowCenter = new ContentPosition(Boundary.fromTopLeft(elementBox.bottomCenter(contentSize), contentSize), this.css.below, this.css.center);
             var belowBeginning = new ContentPosition(Boundary.fromTopLeft(elementBox.bottomLeft, contentSize), this.css.below, this.css.beginning);
             var belowEnd = new ContentPosition(Boundary.fromTopRight(elementBox.bottomRight, contentSize), this.css.below, this.css.end);
             var afterBeginning = new ContentPosition(Boundary.fromTopLeft(elementBox.topRight, contentSize), this.css.after, this.css.beginning);
@@ -143,9 +148,10 @@ module AngularPopoverModule {
             var beforeBeginning = new ContentPosition(Boundary.fromTopRight(elementBox.topLeft, contentSize), this.css.before, this.css.beginning);
             var beforeEnd = new ContentPosition(Boundary.fromBottomRight(elementBox.bottomLeft, contentSize), this.css.before, this.css.end);
 
-            var defaultPosition = belowBeginning;
+            var defaultPosition = belowCenter;
 
             var positionOrder = [
+                belowCenter,
                 belowBeginning,
                 belowEnd,
                 afterBeginning,
@@ -155,6 +161,9 @@ module AngularPopoverModule {
                 beforeBeginning,
                 beforeEnd
             ];
+
+            positionOrder.splice(positionOrder.indexOf(defaultPosition), 1);
+            positionOrder.splice(0, 0, defaultPosition);
 
             for (var i = 0; i < positionOrder.length; i++) {
                 if (this.tryPosition(positionOrder[i]))
