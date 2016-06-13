@@ -44,8 +44,8 @@ module AngularPopoverModule {
             return new Point(this.left, this.bottom);
         }
 
-        public bottomCenter(size: Size, diff: number): Point {
-            return new Point(this.left + diff / 2, this.bottom)
+        public bottomCenter(contentSize: Size, elementSize: Size): Point {
+            return new Point(this.left + (elementSize.width - contentSize.width) / 2, this.bottom)
         }
 
         public get bottomRight(): Point {
@@ -136,10 +136,9 @@ module AngularPopoverModule {
             var contentSize = new Size(this.content.outerWidth(true), this.content.outerHeight(true));
 
             var pos = element.offset();
-            var widthDifference = elementSize.width - contentSize.width;
             var elementBox = new Boundary(pos.top, pos.left, pos.top + elementSize.height, pos.left + elementSize.width);
 
-            var belowCenter = new ContentPosition(Boundary.fromTopLeft(elementBox.bottomCenter(contentSize, widthDifference), contentSize), this.css.below, this.css.center);
+            var belowCenter = new ContentPosition(Boundary.fromTopLeft(elementBox.bottomCenter(contentSize, elementSize), contentSize), this.css.below, this.css.center);
             var belowBeginning = new ContentPosition(Boundary.fromTopLeft(elementBox.bottomLeft, contentSize), this.css.below, this.css.beginning);
             var belowEnd = new ContentPosition(Boundary.fromTopRight(elementBox.bottomRight, contentSize), this.css.below, this.css.end);
             var afterBeginning = new ContentPosition(Boundary.fromTopLeft(elementBox.topRight, contentSize), this.css.after, this.css.beginning);
