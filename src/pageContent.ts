@@ -126,7 +126,27 @@ module AngularPopoverModule {
                     return;
             }
 
-            this.setPosition(defaultPosition);
+            if (this.isOffRightScreen(defaultPosition.boundary)) {
+                this.setPosition(defaultPosition, defaultPosition.boundary.top, "", 0, "");
+                return;
+            }
+
+            if (this.isOffLeftScreen(defaultPosition.boundary)) {
+                this.setPosition(defaultPosition, defaultPosition.boundary.top, 0, "", "");
+                return;
+            }
+
+            if (this.isOffTopScreen(defaultPosition.boundary)) {
+                this.setPosition(defaultPosition, 0, defaultPosition.boundary.left, "", "");
+                return;
+            }
+
+            if (this.isOffBottomScreen(defaultPosition.boundary)) {
+                this.setPosition(defaultPosition, "", defaultPosition.boundary.left, "", 0);
+                return;
+            }
+
+            this.setPosition(defaultPosition, defaultPosition.boundary.top, defaultPosition.boundary.left, "", "");
         }
 
         positionFromElement(element) {
@@ -170,12 +190,32 @@ module AngularPopoverModule {
                     return;
             }
 
-            this.setPosition(defaultPosition);
+            // if (this.isOffRightScreen(defaultPosition.boundary)) {
+            //     this.setPosition(defaultPosition, defaultPosition.boundary.top, "", 0, "");
+            //     return;
+            // }
+
+            // if (this.isOffLeftScreen(defaultPosition.boundary)) {
+            //     this.setPosition(defaultPosition, defaultPosition.boundary.top, 0, "", "");
+            //     return;
+            // }
+
+            // if (this.isOffTopScreen(defaultPosition.boundary)) {
+            //     this.setPosition(defaultPosition, 0, defaultPosition.boundary.left, "", "");
+            //     return;
+            // }
+
+            // if (this.isOffBottomScreen(defaultPosition.boundary)) {
+            //     this.setPosition(defaultPosition, "", defaultPosition.boundary.left, "", 0);
+            //     return;
+            // }
+
+            this.setPosition(defaultPosition, defaultPosition.boundary.top, defaultPosition.boundary.left, "", "");
         }
 
         tryPosition(position: ContentPosition) {
             if (!this.isOffScreen(position.boundary)) {
-                this.setPosition(position);
+                this.setPosition(position, position.boundary.top, position.boundary.left);
                 return true;
             }
             return false;
@@ -195,12 +235,12 @@ module AngularPopoverModule {
             this.content.removeClass(classes.join(" "));
         }
 
-        setPosition(position: ContentPosition) {
+        setPosition(position, top: any = "", left: any = "", right: any = "", bottom: any = "") {
             var css = {
-                top: position.boundary.top,
-                left: position.boundary.left,
-                right: "",
-                bottom: ""
+                top: top,
+                left: left,
+                right: right,
+                bottom: bottom
             };
 
             this.content.css(css)
@@ -208,17 +248,39 @@ module AngularPopoverModule {
                 .addClass(position.arrowCss);
         }
 
-        isOffScreen(boundary) {
-
-            var topScroll = this.$window.scrollY;
-
-            if (boundary.top < 0 + topScroll || boundary.left < 0)
+        isOffScreen(boundary: Boundary): boolean {
+            if (this.isOffTopScreen(boundary) ||
+                this.isOffLeftScreen(boundary) ||
+                this.isOffRightScreen(boundary) ||
+                this.isOffBottomScreen(boundary))
                 return true;
 
+            return false;
+        }
+
+        isOffTopScreen(boundary: Boundary): boolean {
+            if (boundary.top < 0 + this.$window.scrollY)
+                return true;
+            return false;
+        }
+
+        isOffLeftScreen(boundary: Boundary): boolean {
+            if (boundary.left < 0)
+                return true;
+            return false;
+        }
+
+        isOffRightScreen(boundary: Boundary): boolean {
             var screen = new Size(this.$window.innerWidth, this.$window.innerHeight);
-            if (boundary.right > screen.width || boundary.bottom > screen.height + topScroll)
+            if (boundary.right > screen.width)
                 return true;
+            return false;
+        }
 
+        isOffBottomScreen(boundary: Boundary): boolean {
+            var screen = new Size(this.$window.innerWidth, this.$window.innerHeight);
+            if (boundary.bottom > screen.height + this.$window.scrollY)
+                return true;
             return false;
         }
     }

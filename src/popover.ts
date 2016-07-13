@@ -156,17 +156,19 @@ module AngularPopoverModule {
                 $scope.$apply();
             });
 
-            //             $html.on(getEvent("DOMMouseScroll", "mousewheel"), (e) => {
-            //                 if (!ctrl.isVisible)
-            //                     return;
-            // 
-            //                 if (scrollableContent && scrollableContent.has(e.target).length > 0) {
-            //                     return;
-            //                 }
-            // 
-            //                 ctrl.isVisible = false;
-            //                 $scope.$apply();
-            //             });
+            $html.on(getEvent("DOMMouseScroll", "mousewheel"), (e) => {
+                if (!ctrl.isVisible)
+                    return;
+
+                setPosition();
+            });
+
+            $(this.$window).on(getEvent("resize"), e => {
+                if (!ctrl.isVisible)
+                    return;
+
+                setPosition();
+            });
 
             $body.on(getEvent("keyup"), e => {
                 if (!ctrl.isVisible)
@@ -179,7 +181,8 @@ module AngularPopoverModule {
             });
 
             $element.on("$destroy", () => {
-                //$body.off(getEvent("keyup", "DOMMouseScroll", "mousewheel"));
+                $(this.$window).off(getEvent("resize"));
+                $body.off(getEvent("keyup", "DOMMouseScroll", "mousewheel"));
                 $body.off(getEvent("keyup"));
                 $html.off(getEvent("click"));
                 if (content)
