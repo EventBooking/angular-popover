@@ -115,7 +115,7 @@ module AngularPopoverModule {
                     content.addClass("popover--isVisible");
 
                     // is it scrollable
-                    if(scrollableContent) {
+                    if(scrollableContent.length > 0) {
                         var elScroll = scrollableContent.get(0);
                         var hasVertScrollbar = elScroll.scrollHeight > elScroll.clientHeight;
                         scrollableContent.toggleClass('popover-scrollable--vert', hasVertScrollbar);
