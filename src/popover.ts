@@ -113,6 +113,14 @@ module AngularPopoverModule {
             var setPosition = () => {
                 this.$timeout(() => {
                     content.addClass("popover--isVisible");
+
+                    // is it scrollable
+                    if(scrollableContent) {
+                        var elScroll = scrollableContent.get(0);
+                        var hasVertScrollbar = elScroll.scrollHeight > elScroll.clientHeight;
+                        scrollableContent.toggleClass('popover-scrollable--vert', hasVertScrollbar);
+                    }
+
                     if (position)
                         pageContentService.positionFromPoint(position.x, position.y);
                     else

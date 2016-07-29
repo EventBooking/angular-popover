@@ -8,3 +8,8 @@
     background-color: lightgray;
     overflow: auto;
 }
+
+.sidebar-popoverMenu--fixed {
+    height: 300px;
+    overflow: auto;
+}
