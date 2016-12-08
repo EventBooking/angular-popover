@@ -46,7 +46,7 @@ module AngularPopoverModule {
     class PopOverDirective {
         static $inject = ["$q", "$parse", "$compile", "$window", "$templateCache", "$timeout", "pageContentFactory"];
 
-        constructor(private $q: angular.IQService, private $parse: angular.IParseService, private $compile, private $window, private $templateCache, private $timeout, private pageContentFactory: IPageContentFactory) { }
+        constructor(private $q: angular.IQService, private $parse: angular.IParseService, private $compile, private $window: angular.IWindowService, private $templateCache: angular.ITemplateCacheService, private $timeout: angular.ITimeoutService, private pageContentFactory: IPageContentFactory) { }
 
         restrict = 'A';
         // scope = DO NOT USE A SCOPE ON THIS! 360NOSCOPE
@@ -115,11 +115,14 @@ module AngularPopoverModule {
                     content.addClass("popover--isVisible");
 
                     // is it scrollable
-                    if(scrollableContent.length > 0) {
+                    if (scrollableContent.length > 0) {
                         var elScroll = scrollableContent.get(0);
                         var hasVertScrollbar = elScroll.scrollHeight > elScroll.clientHeight;
                         scrollableContent.toggleClass('popover-scrollable--vert', hasVertScrollbar);
                     }
+
+                    if (ctrl.isFullscreen)
+                        return;
 
                     if (position)
                         pageContentService.positionFromPoint(position.x, position.y);

@@ -13,3 +13,8 @@
     height: 300px;
     overflow: auto;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+}

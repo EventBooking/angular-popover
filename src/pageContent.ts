@@ -86,7 +86,7 @@ module AngularPopoverModule {
     class PageContentService implements IPageContentService {
 
         constructor(private $window, private content, private isVertical, private xOffset, private yOffset) {
-            content.addClass(this.cssName);
+            
         }
 
         private cssName = "pagecontent";
@@ -103,6 +103,7 @@ module AngularPopoverModule {
         positionFromPoint(x, y) {
             this.reset();
 
+            this.content.addClass(this.cssName);
             var contentSize = new Size(this.content.outerWidth(true), this.content.outerHeight(true));
             var halfwidth = contentSize.width / 2;
             var halfHeight = contentSize.height / 2;
@@ -152,6 +153,7 @@ module AngularPopoverModule {
         positionFromElement(element) {
             this.reset();
 
+            this.content.addClass(this.cssName);
             var elementSize = new Size(element.outerWidth(false), element.outerHeight(false));
             var contentSize = new Size(this.content.outerWidth(true), this.content.outerHeight(true));
 
@@ -232,6 +234,7 @@ module AngularPopoverModule {
                 this.css.end
             ];
 
+            this.content.removeClass(this.cssName);
             this.content.removeClass(classes.join(" "));
         }
 

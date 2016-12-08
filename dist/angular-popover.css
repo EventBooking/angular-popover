@@ -16,30 +16,43 @@
   background-image: radial-gradient(circle, #e5e5e5, #ffffff);
 }
 .popover {
-  display: none;
   padding: 5px;
   -webkit-transition: none;
           transition: none;
+  background-color: #fff;
+  box-sizing: border-box;
+  z-index: 999;
+}
+.popover:not(.popover--fullScreen) {
+  display: none;
+}
+.popover:not(.popover--fullScreen).popover--isVisible {
+  display: block;
 }
 .popover [pop-over-toggle] {
   cursor: pointer;
 }
 .popover--fullScreen {
   top: 0;
-  left: 0;
-  right: 0;
+  left: -100%;
+  width: 100%;
   bottom: 0;
   overflow: auto;
   border-radius: 0;
-  padding-top: 30px;
+  position: fixed;
+  -webkit-transition: left 0.25s ease-in-out;
+          transition: left 0.25s ease-in-out;
 }
-.popover--isVisible {
-  display: block;
+.popover--fullScreen.popover--isVisible {
+  left: 0%;
 }
 .popover-scrollable {
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 400px;
+}
+.popover--fullScreen .popover-scrollable {
+  max-height: inherit;
 }
 .popover-scrollable.popover-scrollable--vert {
   padding-right: 20px;
@@ -72,9 +85,16 @@
 }
 .popover-close {
   display: none;
-  position: absolute;
-  top: 8px;
-  right: 8px;
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.popover-close:before {
+  content: "\2715";
+  cursor: pointer;
+  font-style: normal;
 }
 .popover--fullScreen > .popover-close {
   display: inline-block;
