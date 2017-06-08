@@ -1,18 +1,17 @@
 {
   "name": "angular-popover",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "pretest": "npm run tsc:tests:w",
     "test": "karma start",
-    "postinstall": "bower install & typings install",
-    "build": "gulp styles & gulp html",
+    "postinstall": "typings install",
+    "build": "npm run tsc & gulp styles & gulp html",
     "tsc": "tsc -p src",
     "tsc:w": "tsc -p src -w",
     "tsc:tests": "tsc -p tests",
     "tsc:tests:w": "tsc -p tests -w",
-    "bower": "bower",
     "gulp": "gulp",
     "typings": "typings",
     "start": "lite-server"
@@ -28,7 +27,6 @@
   },
   "homepage": "https://github.com/EventBooking/angular-popover#readme",
   "devDependencies": {
-    "bower": "^1.7.0",
     "del": "^2.2.0",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "~2.3.1",
@@ -61,5 +59,8 @@
     "sinon": "^1.17.2"
   },
   "dependencies": {
+    "angular": "^1.4.9",
+    "jquery": "^2.1.4",
+    "angular-typescript-module": "github:eventbooking/angular-typescript-module#v2.0.0"
   }
 }
