@@ -1,8 +1,9 @@
 {
   "name": "angular-popover",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/angular-popover.js",
+  "typings": "./dist/angular-popover.d.ts",
   "scripts": {
     "pretest": "npm run tsc:tests:w",
     "test": "karma start",
@@ -61,6 +62,6 @@
   "dependencies": {
     "angular": "^1.4.9",
     "jquery": "^2.1.4",
-    "angular-typescript-module": "github:eventbooking/angular-typescript-module#v2.0.0"
+    "angular-typescript-module": "github:eventbooking/angular-typescript-module#v2.0.1"
   }
 }
