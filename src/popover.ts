@@ -1,6 +1,11 @@
 module AngularPopoverModule {
 
-    class PopOverController {
+    export interface IPopOverController {
+        positionType: string;
+        isVisible: boolean;
+    }
+
+    class PopOverController implements IPopOverController {
         static $inject = ['isMobile'];
 
         constructor(isMobile) {
@@ -12,6 +17,7 @@ module AngularPopoverModule {
         show: any;
         hide: any;
         initialized: boolean;
+        positionType: string;
         popOverClick = (): any => { };
         popOverDisabled = (): any => { };
 
@@ -72,13 +78,14 @@ module AngularPopoverModule {
             var $body = angular.element('body'),
                 $html = angular.element('html'),
                 isVertical = typeof $attrs.popOverHorizontal == 'undefined',
-                positionType = $attrs.positionType || 'mouse',
                 xOffset = isVertical ? 27 : 20,
                 yOffset = isVertical ? 16 : 24,
                 pageContentService: IPageContentService,
                 content,
                 scrollableContent,
                 position;
+            
+            ctrl.positionType = $attrs.positionType || 'mouse';
 
             var getEvent = (...names) => {
                 return names.map(name => `${name}.${$scope.$id}`).join(' ');
@@ -147,7 +154,7 @@ module AngularPopoverModule {
             };
 
             $element.on("click.popOver", e => {
-                if (positionType == 'mouse')
+                if (ctrl.positionType == 'mouse')
                     position = { x: e.pageX, y: e.pageY };
                 ctrl.isVisible = !ctrl.isVisible;
                 $scope.$apply();

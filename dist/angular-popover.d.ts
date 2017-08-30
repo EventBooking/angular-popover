@@ -10,4 +10,8 @@ declare module AngularPopoverModule {
     }
 }
 declare module AngularPopoverModule {
+    interface IPopOverController {
+        positionType: string;
+        isVisible: boolean;
+    }
 }
