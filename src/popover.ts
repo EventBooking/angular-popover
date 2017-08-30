@@ -17,7 +17,7 @@ namespace AngularPopoverModule {
         show: any;
         hide: any;
         initialized: boolean;
-        positionType: string;
+        positionType: string = "mouse";
         popOverClick = (): any => { };
         popOverDisabled = (): any => { };
 
@@ -84,8 +84,9 @@ namespace AngularPopoverModule {
                 content,
                 scrollableContent,
                 position;
-            
-            ctrl.positionType = $attrs.positionType || 'mouse';
+
+            if ($attrs.positionType)
+                ctrl.positionType = $attrs.positionType;
 
             var getEvent = (...names) => {
                 return names.map(name => `${name}.${$scope.$id}`).join(' ');
