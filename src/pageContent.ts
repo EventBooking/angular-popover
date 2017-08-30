@@ -1,4 +1,4 @@
-module AngularPopoverModule {
+namespace AngularPopoverModule {
 
     class Size {
         constructor(public width, public height) {
@@ -161,28 +161,6 @@ module AngularPopoverModule {
             }
 
             this.setPosition(defaultPosition, top, left, right, bottom);
-
-            // if (this.isOffRightScreen(defaultPosition.boundary)) {
-            //     this.setPosition(defaultPosition, defaultPosition.boundary.top, "", 0, "");
-            //     return;
-            // }
-
-            // if (this.isOffLeftScreen(defaultPosition.boundary)) {
-            //     this.setPosition(defaultPosition, defaultPosition.boundary.top, 0, "", "");
-            //     return;
-            // }
-
-            // if (this.isOffTopScreen(defaultPosition.boundary)) {
-            //     this.setPosition(defaultPosition, 0, defaultPosition.boundary.left, "", "");
-            //     return;
-            // }
-
-            // if (this.isOffBottomScreen(defaultPosition.boundary)) {
-            //     this.setPosition(defaultPosition, "", defaultPosition.boundary.left, "", 0);
-            //     return;
-            // }
-
-            // this.setPosition(defaultPosition, defaultPosition.boundary.top, defaultPosition.boundary.left, "", "");
         }
 
         getOffScreen(boundary: Boundary) {

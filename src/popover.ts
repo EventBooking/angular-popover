@@ -1,4 +1,4 @@
-module AngularPopoverModule {
+namespace AngularPopoverModule {
 
     export interface IPopOverController {
         positionType: string;
