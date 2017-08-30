@@ -16,6 +16,10 @@ module AngularPopoverModule {
         constructor(public top: number, public left: number, public bottom: number, public right: number) {
         }
 
+        static fromBoundary(boundary: Boundary): Boundary {
+            return new Boundary(boundary.top, boundary.left, boundary.bottom, boundary.right);
+        }
+
         static fromTopLeft(point: Point, size: Size): Boundary {
             return new Boundary(point.y, point.x, point.y + size.height, point.x + size.width);
         }
@@ -86,7 +90,7 @@ module AngularPopoverModule {
     class PageContentService implements IPageContentService {
 
         constructor(private $window, private content, private isVertical, private xOffset, private yOffset) {
-            
+
         }
 
         private cssName = "pagecontent";
@@ -127,27 +131,68 @@ module AngularPopoverModule {
                     return;
             }
 
-            if (this.isOffRightScreen(defaultPosition.boundary)) {
-                this.setPosition(defaultPosition, defaultPosition.boundary.top, "", 0, "");
-                return;
+            var boundary = defaultPosition.boundary;
+            var offscreen = this.getOffScreen(boundary);
+            var top: string | number = boundary.top;
+            var bottom: string | number = boundary.bottom;
+            var left: string | number = boundary.left;
+            var right: string | number = boundary.right;
+
+            if (offscreen.right) {
+                right = 0;
+                left = offscreen.left ? 0 : "";
+            }
+            else if (offscreen.left) {
+                right = "";
+                left = 0;
+            } else {
+                right = ""
             }
 
-            if (this.isOffLeftScreen(defaultPosition.boundary)) {
-                this.setPosition(defaultPosition, defaultPosition.boundary.top, 0, "", "");
-                return;
+            if (offscreen.top) {
+                top = 0;
+                bottom = offscreen.bottom ? 0 : "";
+            }
+            else if (offscreen.bottom) {
+                top = "";
+                bottom = 0;
+            } else {
+                bottom = "";
             }
 
-            if (this.isOffTopScreen(defaultPosition.boundary)) {
-                this.setPosition(defaultPosition, 0, defaultPosition.boundary.left, "", "");
-                return;
-            }
+            this.setPosition(defaultPosition, top, left, right, bottom);
 
-            if (this.isOffBottomScreen(defaultPosition.boundary)) {
-                this.setPosition(defaultPosition, "", defaultPosition.boundary.left, "", 0);
-                return;
-            }
+            // if (this.isOffRightScreen(defaultPosition.boundary)) {
+            //     this.setPosition(defaultPosition, defaultPosition.boundary.top, "", 0, "");
+            //     return;
+            // }
 
-            this.setPosition(defaultPosition, defaultPosition.boundary.top, defaultPosition.boundary.left, "", "");
+            // if (this.isOffLeftScreen(defaultPosition.boundary)) {
+            //     this.setPosition(defaultPosition, defaultPosition.boundary.top, 0, "", "");
+            //     return;
+            // }
+
+            // if (this.isOffTopScreen(defaultPosition.boundary)) {
+            //     this.setPosition(defaultPosition, 0, defaultPosition.boundary.left, "", "");
+            //     return;
+            // }
+
+            // if (this.isOffBottomScreen(defaultPosition.boundary)) {
+            //     this.setPosition(defaultPosition, "", defaultPosition.boundary.left, "", 0);
+            //     return;
+            // }
+
+            // this.setPosition(defaultPosition, defaultPosition.boundary.top, defaultPosition.boundary.left, "", "");
+        }
+
+        getOffScreen(boundary: Boundary) {
+            var offscreen = {
+                right: this.isOffRightScreen(boundary),
+                left: this.isOffLeftScreen(boundary),
+                top: this.isOffTopScreen(boundary),
+                bottom: this.isOffBottomScreen(boundary)
+            }
+            return offscreen;
         }
 
         positionFromElement(element) {

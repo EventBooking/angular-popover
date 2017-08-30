@@ -18,3 +18,24 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.corner {
+    position: absolute;
+    z-index: 99;
+}
+
+.corner--top {
+    top: 0;
+}
+
+.corner--bottom {
+    bottom: 0;
+}
+
+.corner--left {
+    left: 0;
+}
+
+.corner--right {
+    right: 0;
+}
