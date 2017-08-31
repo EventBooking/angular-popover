@@ -1,5 +1,5 @@
 
-module AngularPopoverModule {
+namespace AngularPopoverModule {
 
     class MobileConfig {
         static isMobile(): boolean {
