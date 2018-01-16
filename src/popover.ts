@@ -6,9 +6,9 @@ namespace AngularPopoverModule {
     }
 
     class PopOverController implements IPopOverController {
-        static $inject = ['isMobile'];
+        static $inject = ['isMobile', '$element'];
 
-        constructor(isMobile) {
+        constructor(isMobile: boolean, private $element: angular.IAugmentedJQuery) {
             this.isVisible = false;
             this.isFullscreen = isMobile;
             this.initialized = true;
@@ -19,7 +19,22 @@ namespace AngularPopoverModule {
         initialized: boolean;
         positionType: string = "mouse";
         popOverClick = (): any => { };
-        popOverDisabled = (): any => { };
+        popOverDisabled = (): boolean => false;
+
+        $doCheck() {
+            const isDisabled = this.popOverDisabled();
+            if (isDisabled !== this._isDisabled) {
+                this._isDisabled = isDisabled;
+                const css = 'popover--disabled';
+                if (isDisabled) this.$element.addClass(css);
+                else this.$element.removeClass(css);
+            }
+        }
+
+        private _isDisabled: boolean;
+        public get isDisabled(): boolean {
+            return this._isDisabled;
+        }
 
         private _isVisible = false;
 
@@ -28,7 +43,7 @@ namespace AngularPopoverModule {
         }
 
         set isVisible(visible: boolean) {
-            if (!this.initialized || this.popOverDisabled())
+            if (!this.initialized || this.isDisabled)
                 return;
 
             this._isVisible = visible;

@@ -9,6 +9,13 @@
         <div pop-over="menu2.html" position-type="element" style="margin: 50px; height: 50px; border: solid 1px #aaa;">
             [position-type="element" w/ longer name]
         </div>
+        <div pop-over="menu2.html" position-type="element" pop-over-disabled="vm.isDisabled" style="margin: 50px; height: 50px; border: solid 1px #aaa;">
+            [pop-over-disabled={{!!vm.isDisabled}}]
+        </div>
+        <div>
+            <div>Disabled: {{!!vm.isDisabled}}</div>
+            <button ng-model="vm.isDisabled" ng-click="vm.isDisabled = !vm.isDisabled">toggle</button>
+        </div>
     </div>
 </div>
 

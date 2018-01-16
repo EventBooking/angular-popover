@@ -26,7 +26,7 @@
 .popover:not(.popover--fullScreen).popover--isVisible {
   display: block;
 }
-.popover [pop-over-toggle] {
+.popover:not(.popover--disabled) [pop-over-toggle] {
   cursor: pointer;
 }
 .popover--fullScreen {
@@ -53,7 +53,7 @@
 .popover-scrollable.popover-scrollable--vert {
   padding-right: 20px;
 }
-[pop-over] {
+[pop-over]:not(.popover--disabled) {
   cursor: pointer;
 }
 .popover-select {

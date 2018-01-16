@@ -1,4 +1,4 @@
-declare module AngularPopoverModule {
+declare namespace AngularPopoverModule {
 }
 declare namespace AngularPopoverModule {
     interface IPageContentService {

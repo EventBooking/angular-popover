@@ -1,6 +1,6 @@
 {
   "name": "angular-popover",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "",
   "main": "./dist/angular-popover.js",
   "typings": "./dist/angular-popover.d.ts",
@@ -14,7 +14,9 @@
     "tsc:tests": "tsc -p tests",
     "tsc:tests:w": "tsc -p tests -w",
     "gulp": "gulp",
+    "watch": "npm run gulp -- watch",
     "typings": "typings",
+    "browserSync": "browser-sync start --config bs-config.js",
     "start": "lite-server"
   },
   "repository": {
