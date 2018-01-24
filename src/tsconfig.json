@@ -7,16 +7,17 @@
         "inlineSourceMap": true,
         "inlineSources": true,
         "target": "es5",
-        "out": "dist/angular-popover.js"
+        "out": "dist/angular-popover.js",
+        "types": [
+            "angular",
+            "jquery",
+            "angular-typescript-module"
+        ]
     },
     "files": [
-        "../typings/main.d.ts",
         "app.ts",
         "mobile.ts",
         "pageContent.ts",
         "popover.ts"
-    ],
-    "ignore": [
-        "../typings"
     ]
 }
