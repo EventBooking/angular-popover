@@ -77,7 +77,7 @@ namespace AngularPopoverModule {
 
         private position;
 
-        link = ($scope, $element, $attrs) => {
+        link = ($scope, $element, $attrs, ctrls, $transclude) => {
             var ctrl: PopOverController = $scope[this.controllerAs];
 
             if ($attrs.popOverClick) {
@@ -118,7 +118,7 @@ namespace AngularPopoverModule {
             };
 
             var create = () => {
-                content = this.createContent($attrs.popOver, $scope);
+                content = this.createContent($attrs.popOver, $scope, $transclude);
                 content.on("click", () => {
                     if (!ctrl.isVisible)
                         return;
@@ -224,15 +224,18 @@ namespace AngularPopoverModule {
             });
         };
 
-        createContent(htmlUrl, $scope) {
+        createContent(htmlUrl, $scope, $transclude) {
             var html = angular.element(this.$templateCache.get(htmlUrl)),
                 template = angular.element(`<div class="popover" ng-class="{'popover--fullScreen': popOver.isFullscreen}"><i class="popover-close icon icon-times" ng-click="popOver.closeContent()"></i></div>`),
                 htmlLink = this.$compile(html),
                 templateLink = this.$compile(template);
 
             template.append(html);
-            templateLink($scope);
-            htmlLink($scope);
+            const options = {
+                parentBoundTranscludeFn: $transclude
+            };
+            templateLink($scope, null, options);
+            htmlLink($scope, null, options);
 
             return template;
         }
