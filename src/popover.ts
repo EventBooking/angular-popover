@@ -118,7 +118,7 @@ namespace AngularPopoverModule {
             };
 
             var create = () => {
-                content = this.createContent($attrs.popOver, $scope, $transclude);
+                content = this.createContent($attrs.popOver, $scope, $transclude, $element);
                 content.on("click", () => {
                     if (!ctrl.isVisible)
                         return;
@@ -224,18 +224,29 @@ namespace AngularPopoverModule {
             });
         };
 
-        createContent(htmlUrl, $scope, $transclude) {
+        createContent(htmlUrl, $scope, $transclude, $element) {
             var html = angular.element(this.$templateCache.get(htmlUrl)),
-                template = angular.element(`<div class="popover" ng-class="{'popover--fullScreen': popOver.isFullscreen}"><i class="popover-close icon icon-times" ng-click="popOver.closeContent()"></i></div>`),
-                htmlLink = this.$compile(html),
-                templateLink = this.$compile(template);
+                template = angular.element(`<div class="popover" ng-class="{'popover--fullScreen': popOver.isFullscreen}"><i class="popover-close icon icon-times" ng-click="popOver.closeContent()"></i></div>`);
 
             template.append(html);
-            const options = {
-                parentBoundTranscludeFn: $transclude
-            };
-            templateLink($scope, null, options);
-            htmlLink($scope, null, options);
+
+            var data = $element.parents().inheritedData();
+            var hash = {};
+            Object.keys(data)
+                .filter(x => x != '$isolateScope')
+                .forEach(key => {
+                    var match = key.match(/\$(.*)Controller/);
+                    if (match.length > 0) {
+                        var name = match[1];
+                        hash[name] = { instance: data[key] }
+                    }
+                });
+
+
+            this.$compile(template)($scope, null, {
+                parentBoundTranscludeFn: $transclude,
+                transcludeControllers: hash
+            });
 
             return template;
         }
