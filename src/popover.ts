@@ -230,18 +230,16 @@ namespace AngularPopoverModule {
 
             template.append(html);
 
-            var data = $element.parents().inheritedData();
             var hash = {};
-            Object.keys(data)
-                .filter(x => x != '$isolateScope')
-                .forEach(key => {
-                    var match = key.match(/\$(.*)Controller/);
-                    if (match.length > 0) {
-                        var name = match[1];
-                        hash[name] = { instance: data[key] }
-                    }
+            function add(data) {
+                Object.keys(data).forEach( key => {
+                    var [,name] = key.match(/\$(.*)Controller/) || [undefined,undefined];
+                    if(!name) return;
+                    hash[name] = { instance: data[key] };
                 });
+            }
 
+            $element.parents().get().reverse().forEach((x) => add(angular.element(x).inheritedData()));
 
             this.$compile(template)($scope, null, {
                 parentBoundTranscludeFn: $transclude,
